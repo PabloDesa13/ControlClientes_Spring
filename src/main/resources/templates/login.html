@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+	<head th:replace="layout/plantilla :: head">
+		<title>Inicio</title>
+	</head>	
+	
+<body>
+
+<!-- breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+				<li><a th:href="@{/}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+				<li class="active">Login Page</li>
+			</ol>
+		</div>
+	</div>
+<!-- //breadcrumbs -->
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!-- login -->
+	<div class="login">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Iniciar Sesion</h3>
+			<p class="est animated wow zoomIn" data-wow-delay=".5s">
+				Inicia Sesion para realizar tus compras seguras y de manera mas rapida y sencilla.
+			</p>
+			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+				<form method="POST" th:action="@{/login}">
+					<div th:if="${param.error}">
+	                    <div class="alert alert-danger">
+	                        Usuario o Contrase&ntilde;a Invalida.
+	                    </div>
+	                </div>
+	                <div th:if="${param.logout}">
+	                    <div class="alert alert-info">
+	                        You have been logged out.
+	                    </div>
+	                </div>
+					<label for="username">Usuario:</label>
+					<input type="text" name="username" id="username" placeholder="Usuario" required="true" >
+					<label for="password">Contrase&ntilde;a:</label>  
+					<input type="password" name="password" id="password" placeholder="Contrase&ntilde;a" required="true" >
+					<div class="forgot">
+						<a href="#">¿Olvidaste tu Contrase&ntilde;a?</a>
+					</div>
+					<input type="submit" value="Login">
+				</form>
+			</div>
+			<h4 data-wow-delay=".5s">Usuarios nuevos</h4>
+			<p data-wow-delay=".5s">
+				<a th:href="@{/register}">Registrate aqui</a> o regresa a 
+				<a th:href="@{/}">Inicio<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</p>
+		</div>
+	</div>
+<!-- //login -->
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+</body>
+</html>

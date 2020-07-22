@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  
+<head th:fragment="header">
+	<title>Central Side Clothes | Tienda Online</title>
+	<meta charset="UTF-8" />
+	
+	<!-- PRUEBA -------------------------------------------------------------------------------------->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+	<!-- PRUEBA -------------------------------------------------------------------------------------->
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- timer -->
+	<link rel="stylesheet" href="css/jquery.countdown.css" />
+	<!-- //timer -->
+	<!-- animation-effect -->
+	<link href="css/animate.min.css" rel="stylesheet"> 
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
+	
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/pooper.js/umd/pooper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<!-- cart -->
+	<script src="js/simpleCart.js"></script>
+	<script src="js/simpleCart.min.js"></script>
+	
+	<!-- PRUEBA ----------------------------------------------------------------------------------------------->
+	<script>
+	  paypal.Buttons({
+	    createOrder: function(data, actions) {
+	      // This function sets up the details of the transaction, including the amount and line item details.
+	      return actions.order.create({
+	        purchase_units: [{
+	          amount: {
+	            value: '0.01'
+	          }
+	        }]
+	      });
+	    },
+	    onApprove: function(data, actions) {
+	      // This function captures the funds from the transaction.
+	      return actions.order.capture().then(function(details) {
+	        // This function shows a transaction success message to your buyer.
+	        alert('Transaction completed by ' + details.payer.name.given_name);
+	      });
+	    }
+	  }).render('#paypal-button-container');
+	  //This function displays Smart Payment Buttons on your web page.
+  </script>
+  
+  <script>
+  simpleCart({
+	    checkout: { 
+	        type: "PayPal" , 
+	        email: "sb-xldfp2417003@personal.example.com" ,
+	        // use paypal sandbox, default is false
+	        sandbox: true , 
+	        // http method for form, "POST" or "GET", default is "POST"
+	        method: "GET" , 
+	        // url to return to on successful checkout, default is null
+	        success: "success.html" , 
+	        // url to return to on cancelled checkout, default is null
+	        cancel: "cancel.html" 
+	    } 
+	});
+  </script>
+  <!-- PRUEBA ----------------------------------------------------------------------------------------------->
+	
+	<!-- cart -->
+	<script src="js/wow.min.js"></script>
+	<script>
+	 new WOW().init();
+	</script>
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+			function hideURLbar(){ window.scrollTo(0,1); } 
+	</script>
+	<!-- //animation-effect -->
+</head>
+<body>
+	<header th:fragment="header">
+		<!-- header -->
+	<div class="header">
+		<div class="container">
+			<div class="header-grid">
+				<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
+					<ul>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:ssclothes@gmail.com">ssclothes@gmail.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>4423 27 95 07</li>
+						<li>
+							<i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>
+							<a th:href="@{/user}">Ingresar</a>
+						</li>
+						<li><i class="glyphicon glyphicon-book" aria-hidden="true"></i>
+							<a th:href="@{/register}">Registrate</a>
+						</li>
+					</ul>
+					<ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto">
+						<li class="nav-item mr-3">
+							<a href="#" class="nav-link">
+								<i class="fas fa-user"></i>
+								<span th:text="#{barra.bienvenido}"></span>
+								<span sec:authentication="name"></span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<form method="POST" th:action="@{/logout}" >
+								<a href="#" onclick="this.parentNode.submit();" class="nav-link">
+									<i class="fas fa-user-times"></i>[[#{barra.salir}]]
+								</a>
+							</form>
+						</li>
+					</ul>
+				</div>
+				<div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">
+					<ul class="social-icons">
+	
+						<li><a href="https://web.facebook.com/CentralSideClothes/" class="facebook"></a></li>
+						<li><a href="#" class="twitter"></a></li>
+						<li><a href="#" class="instagram"></a></li>
+					</ul>
+
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="logo-nav">
+			
+				<div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">
+					<h1><a th:href="@{/}">Central Side <span>Clothes</span></a></h1>
+				</div>
+				<div class="logo-nav-left1">
+					<nav class="navbar navbar-default">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header nav_2">
+						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div> 
+					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+						<ul class="nav navbar-nav">
+							<!-- Mega Menu -->
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
+								<ul class="dropdown-menu multi-column columns-3">
+									<div class="row">
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Hombre</h6>
+												<li><a href="products.html">Clothing</a></li>
+												<li><a href="products.html">Wallets</a></li>
+												<li><a href="products.html">Shoes</a></li>
+												<li><a href="products.html">Watches</a></li>
+												<li><a href="products.html">Accessories</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Mujer</h6>
+												<li><a href="products.html">Clothing</a></li>
+												<li><a href="products.html">Wallets,Bags</a></li>
+												<li><a href="products.html">Footwear</a></li>
+												<li><a href="products.html">Watches</a></li>
+												<li><a href="products.html">Accessories</a></li>
+												<li><a href="products.html">Jewellery</a></li>
+												<li><a href="products.html">Beauty & Grooming</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Niño</h6>
+												<li><a href="products.html">Kids Home Fashion</a></li>
+												<li><a href="products.html">Boy's Clothing</a></li>
+												<li><a href="products.html">Girl's Clothing</a></li>
+												<li><a href="products.html">Shoes</a></li>
+												<li><a href="products.html">Brand Stores</a></li>
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Marcas <b class="caret"></b></a>
+								<ul class="dropdown-menu multi-column columns-3">
+									<div class="row">
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Dickies</h6>
+												<li><a href="furniture.html">Cookware</a></li>
+												<li><a href="furniture.html">Sofas</a></li>
+												<li><a href="furniture.html">Dining Tables</a></li>
+												<li><a href="furniture.html">Shoe Racks</a></li>
+												<li><a href="furniture.html">Home Decor</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>YAGO</h6>
+												<li><a href="furniture.html">Carpets</a></li>
+												<li><a href="furniture.html">Tables</a></li>
+												<li><a href="furniture.html">Sofas</a></li>
+												<li><a href="furniture.html">Shoe Racks</a></li>
+												<li><a href="furniture.html">Sockets</a></li>
+												<li><a href="furniture.html">Electrical Machines</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Victorious</h6>
+												<li><a href="furniture.html">Toys</a></li>
+												<li><a href="furniture.html">Wall Clock</a></li>
+												<li><a href="furniture.html">Lighting</a></li>
+												<li><a href="furniture.html">Top Brands</a></li>
+											</ul>
+										</div>
+										<div class="col-sm-4">
+											<ul class="multi-column-dropdown">
+												<h6>Rollin Hard</h6>
+												<li><a href="furniture.html">Toys</a></li>
+												<li><a href="furniture.html">Wall Clock</a></li>
+												<li><a href="furniture.html">Lighting</a></li>
+												<li><a href="furniture.html">Top Brands</a></li>
+											</ul>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</ul>
+							</li>
+							<li><a href="short-codes.html">Tenis</a></li>
+							<li><a href="short-codes.html">Quienes Somos</a></li>
+							<li><a href="mail.html">Contactanos</a></li>
+						</ul>
+					</div>
+					</nav>
+				</div>
+				<div class="logo-nav-right">
+					<div class="search-box">
+						<div id="sb-search" class="sb-search">
+							<form>
+								<input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
+								<input class="sb-search-submit" type="submit" value="">
+								<span class="sb-icon-search"> </span>
+							</form>
+						</div>
+					</div>
+						<!-- search-scripts -->
+						<script src="js/classie.js"></script>
+						<script src="js/uisearch.js"></script>
+							<script>
+								new UISearch( document.getElementById( 'sb-search' ) );
+							</script>
+						<!-- //search-scripts -->
+				</div>
+				<div class="header-right">
+					<div class="cart box_1">
+						<a href="#myModal" role="button" class="product-view" data-toggle="modal">
+							<h3> 
+							<div class="total">
+								<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+							</div>
+								<img src="images/bag.png" alt="" />
+							</h3>
+						</a>
+						<p><a href="javascript:;" class="simpleCart_empty">Limpiar Carrito</a></p>
+						<div class="clearfix"> </div>
+					</div>	
+				</div>
+				
+					<div class="simpleCart_items" >
+    </div>
+    <br />
+    SubTotal: <span class="simpleCart_total"></span> <br />
+    Tax: <span class="simpleCart_taxCost"></span> <br />
+    Shipping: <span class="simpleCart_shippingCost"></span> <br />
+    -----------------------------<br />
+    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span> <br>
+    <a href="javascript:;" class="simpleCart_checkout">checkout</a>
+    
+    <!-- PRUEBA ------------------------------------------------------------------------------------------------------>
+	<script
+	    src="https://www.paypal.com/sdk/js?client-id=AU6OChrXdcU9w6iYG-RP0_gPWbN16agt8aObwbA9EfL_ifqsNhrG2oHLNuX8ao7BTdzYmMJO-ZKr-LHx"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+	  </script>
+	
+	  <div id="paypal-button-container"></div>
+	
+	  <script>
+	    paypal.Buttons().render('#paypal-button-container');
+	    // This function displays Smart Payment Buttons on your web page.
+	  </script>
+    <!-- PRUEBA ------------------------------------------------------------------------------------------------------>
+    
+				<div class="clearfix"> </div>
+				
+				<div class="span6">
+				  	
+
+				</div>
+	</div>
+<!-- //header -->
+	</header>
+
+	<footer th:fragment="footer" class="bg-warning text-white mt-5 p-5">
+		<!-- <div class="container">
+			<div class="col">
+				<p class="lead text-center">
+					<a th:href="@{/(lang=es)}">ES</a> | 
+					<a th:href="@{/(lang=en)}">EN</a> |
+				</p>
+			</div>
+		</div>-->
+		<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="footer-grids">
+				<div class="col-md-3 footer-grid " data-wow-delay=".5s">
+					<h3>About Us</h3>
+					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse.<span>Excepteur sint occaecat cupidatat 
+						non proident, sunt in culpa qui officia deserunt mollit.</span></p>
+				</div>
+				<div class="col-md-3 footer-grid " data-wow-delay=".6s">
+					<h3>Contact Info</h3>
+					<ul>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+					</ul>
+				</div>
+				<div class="col-md-3 footer-grid" data-wow-delay=".7s">
+					<h3>Flickr Posts</h3>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/13.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/14.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/15.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="footer-grid-left">
+						<a href="single.html"><img src="images/16.jpg" alt=" " class="img-responsive" /></a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="col-md-3 footer-grid" data-wow-delay=".8s">
+					<h3>Blog Posts</h3>
+					<div class="footer-grid-sub-grids">
+						<div class="footer-grid-sub-grid-left">
+							<a href="single.html"><img src="images/9.jpg" alt=" " class="img-responsive" /></a>
+						</div>
+						<div class="footer-grid-sub-grid-right">
+							<h4><a href="single.html">culpa qui officia deserunt</a></h4>
+							<p>Posted On 25/3/2016</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="footer-grid-sub-grids">
+						<div class="footer-grid-sub-grid-left">
+							<a href="single.html"><img src="images/10.jpg" alt=" " class="img-responsive" /></a>
+						</div>
+						<div class="footer-grid-sub-grid-right">
+							<h4><a href="single.html">Quis autem vel eum iure</a></h4>
+							<p>Posted On 25/3/2016</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="footer-logo" data-wow-delay=".5s">
+				<h2><a href="index.html">Best Store <span>shop anywhere</span></a></h2>
+			</div>
+			<div class="copy-right" data-wow-delay=".5s">
+				<p>&copy 2020 Central Side Clothes. All rights reserved | Design by <a href="http://w3layouts.com/">Pablo D&aacute;vila Rojas</a></p>
+			</div>
+		</div>
+	</div>
+<!-- //footer -->
+	</footer>
+</body>
+</html>
